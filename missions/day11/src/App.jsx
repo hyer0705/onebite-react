@@ -1,7 +1,8 @@
 import "./App.css";
+import OrderEditor from "./components/OrderEditor";
 
 function App() {
-  return <h1>Day 11 Mission</h1>;
+  return <OrderEditor />;
 }
 
 export default App;
