@@ -20,6 +20,7 @@ const Editor = ({ onCreate }) => {
   };
 
   const onKeydown = (e) => {
+    if (e.nativeEvent.isComposing) return;
     if (e.key === "Enter") {
       onSubmit();
     }
