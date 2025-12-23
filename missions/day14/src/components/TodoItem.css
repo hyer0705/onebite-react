@@ -9,10 +9,16 @@
 
 .TodoItem input[type="checkbox"] {
   width: 20px;
+  accent-color: rgb(137, 152, 109);
+  cursor: pointer;
 }
 
 .TodoItem .item {
   flex: 1;
+}
+
+.TodoItem input[type="checkbox"]:checked ~ .item {
+  text-decoration: line-through;
 }
 
 .TodoItem .date {
