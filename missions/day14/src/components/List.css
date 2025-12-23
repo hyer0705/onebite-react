@@ -1,0 +1,22 @@
+.List {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.List .search {
+  flex: 1;
+  border: none;
+  border-bottom: 1px solid rgb(220, 220, 220);
+  padding: 15px 0;
+}
+
+.List .search:focus {
+  outline: none;
+  border-bottom: 1px solid rgb(137, 152, 109);
+}
+
+.List .todo_wrapper {
+  display: flex;
+  flex-direction: column;
+}
