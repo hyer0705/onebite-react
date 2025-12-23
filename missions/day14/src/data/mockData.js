@@ -12,7 +12,7 @@ export const mockTodos = [
     date: new Date().getTime(),
   },
   {
-    id: 0,
+    id: 2,
     isDone: false,
     content: "설거지하기",
     date: new Date().getTime(),
