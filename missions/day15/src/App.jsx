@@ -20,7 +20,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "CREATE_CONTACT":
       return [action.data, ...state];
-      break;
+    case "DELETE_CONTACT":
+      return state.filter((contact) => contact.id !== action.id);
     default:
       return state;
   }
@@ -39,6 +40,10 @@ function App() {
     dispatch({ type: "CREATE_CONTACT", data: newContact });
   };
 
+  const onDelete = (id) => {
+    dispatch({ type: "DELETE_CONTACT", id });
+  };
+
   return (
     <div className="App">
       <h2>Contact List</h2>
@@ -46,7 +51,7 @@ function App() {
         <ContactEditor onCreate={onCreate} />
       </section>
       <section>
-        <ContactList contacts={contacts} />
+        <ContactList contacts={contacts} onDelete={onDelete} />
       </section>
     </div>
   );
