@@ -1,9 +1,11 @@
-import { useReducer, useRef, memo } from "react";
+import { useReducer, useRef, memo, useContext } from "react";
 import "./ContactEditor.css";
 import { contactEditorReducer } from "../reducers/contactEditorReducer";
 import { EDITOR_ACTIONS } from "../reducers/types";
+import { ContactDispatchContext } from "../App";
 
-function ContactEditor({ onCreate }) {
+function ContactEditor() {
+  const { onCreateContact } = useContext(ContactDispatchContext);
   const [contact, dispatch] = useReducer(contactEditorReducer, {
     name: "",
     email: "",
@@ -37,7 +39,7 @@ function ContactEditor({ onCreate }) {
       return;
     }
 
-    onCreate(contact);
+    onCreateContact(contact);
     dispatch({ type: EDITOR_ACTIONS.RESET });
   };
 

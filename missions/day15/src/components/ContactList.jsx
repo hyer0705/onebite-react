@@ -1,13 +1,16 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
 import "./ContactList.css";
 import ContactItem from "./ContactItem";
+import { ContactStateContext } from "../App";
 
-function ContactList({ contacts, onDelete }) {
+function ContactList() {
+  const contacts = useContext(ContactStateContext);
+
   return (
     <div className="ContactList">
       <div className="title">Contact List</div>
       {contacts.map((contact) => (
-        <ContactItem key={contact.id} {...contact} onDelete={onDelete} />
+        <ContactItem key={contact.id} {...contact} />
       ))}
     </div>
   );
