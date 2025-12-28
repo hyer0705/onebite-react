@@ -39,8 +39,24 @@ export default function ContactEditor({ onCreate }) {
     <div className="ContactEditor">
       <div className="title">Add Contact</div>
       <div className="input_wrapper">
-        <input ref={nameInputRef} name="name" value={contact.name} onChange={onChangeInput} className="name" placeholder="이름 ..." />
-        <input ref={emailInputRef} name="email" value={contact.email} onChange={onChangeInput} className="contact" placeholder="연락처(이메일) ..." />
+        <input
+          autoComplete="off"
+          ref={nameInputRef}
+          name="name"
+          value={contact.name}
+          onChange={onChangeInput}
+          className="name"
+          placeholder="이름 ..."
+        />
+        <input
+          autoComplete="off"
+          ref={emailInputRef}
+          name="email"
+          value={contact.email}
+          onChange={onChangeInput}
+          className="contact"
+          placeholder="연락처(이메일) ..."
+        />
       </div>
       <button onClick={onClickAddButton}>Add</button>
     </div>
