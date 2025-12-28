@@ -2,9 +2,7 @@ import { memo } from "react";
 import "./ContactList.css";
 import ContactItem from "./ContactItem";
 
-export default memo(function ContactList({ contacts, onDelete }) {
-  console.log("ContactList Rendered");
-
+function ContactList({ contacts, onDelete }) {
   return (
     <div className="ContactList">
       <div className="title">Contact List</div>
@@ -13,4 +11,6 @@ export default memo(function ContactList({ contacts, onDelete }) {
       ))}
     </div>
   );
-});
+}
+
+export default memo(ContactList);

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import "./ContactItem.css";
 
-export default memo(function ContactItem({ id, name, email, onDelete }) {
+function ContactItem({ id, name, email, onDelete }) {
   const onClickRemoveButton = () => onDelete(id);
   return (
     <div className="ContactItem">
@@ -10,4 +10,6 @@ export default memo(function ContactItem({ id, name, email, onDelete }) {
       <button onClick={onClickRemoveButton}>🗑️ Remove</button>
     </div>
   );
-});
+}
+
+export default memo(ContactItem);

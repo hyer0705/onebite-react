@@ -3,8 +3,7 @@ import "./ContactEditor.css";
 import { contactEditorReducer } from "../reducers/contactEditorReducer";
 import { EDITOR_ACTIONS } from "../reducers/types";
 
-export default memo(function ContactEditor({ onCreate }) {
-  console.log("ContactEditor Rendered");
+function ContactEditor({ onCreate }) {
   const [contact, dispatch] = useReducer(contactEditorReducer, {
     name: "",
     email: "",
@@ -69,4 +68,6 @@ export default memo(function ContactEditor({ onCreate }) {
       <button onClick={onClickAddButton}>Add</button>
     </div>
   );
-});
+}
+
+export default memo(ContactEditor);
