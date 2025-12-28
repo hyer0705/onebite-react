@@ -1,9 +1,10 @@
-import { useReducer, useRef } from "react";
+import { useReducer, useRef, memo } from "react";
 import "./ContactEditor.css";
 import { contactEditorReducer } from "../reducers/contactEditorReducer";
 import { EDITOR_ACTIONS } from "../reducers/types";
 
-export default function ContactEditor({ onCreate }) {
+export default memo(function ContactEditor({ onCreate }) {
+  console.log("ContactEditor Rendered");
   const [contact, dispatch] = useReducer(contactEditorReducer, {
     name: "",
     email: "",
@@ -68,4 +69,4 @@ export default function ContactEditor({ onCreate }) {
       <button onClick={onClickAddButton}>Add</button>
     </div>
   );
-}
+});
