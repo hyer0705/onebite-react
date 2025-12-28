@@ -1,10 +1,12 @@
+import { EDITOR_ACTIONS } from "./types";
+
 export function contactEditorReducer(state, action) {
   switch (action.type) {
-    case "CHANGE_NAME":
+    case EDITOR_ACTIONS.CHANGE_NAME:
       return { ...state, name: action.data };
-    case "CHANGE_EMAIL":
+    case EDITOR_ACTIONS.CHANGE_EMAIL:
       return { ...state, email: action.data };
-    case "RESET":
+    case EDITOR_ACTIONS.RESET:
       return { name: "", email: "" };
     default:
       return state;

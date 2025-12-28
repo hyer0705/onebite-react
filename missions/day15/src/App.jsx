@@ -3,6 +3,7 @@ import "./App.css";
 import ContactEditor from "./components/ContactEditor";
 import ContactList from "./components/ContactList";
 import { contactReducer } from "./reducers/contactReducer";
+import { CONTACT_ACTIONS } from "./reducers/types";
 import { mockContacts } from "./data/contactData";
 
 function App() {
@@ -15,11 +16,11 @@ function App() {
       id: contactId.current++,
     };
 
-    dispatch({ type: "CREATE_CONTACT", data: newContact });
+    dispatch({ type: CONTACT_ACTIONS.CREATE, data: newContact });
   };
 
   const onDelete = (id) => {
-    dispatch({ type: "DELETE_CONTACT", id });
+    dispatch({ type: CONTACT_ACTIONS.DELETE, id });
   };
 
   return (

@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import "./ContactEditor.css";
 import { contactEditorReducer } from "../reducers/contactEditorReducer";
+import { EDITOR_ACTIONS } from "../reducers/types";
 
 export default function ContactEditor({ onCreate }) {
   const [contact, dispatch] = useReducer(contactEditorReducer, {
@@ -9,15 +10,20 @@ export default function ContactEditor({ onCreate }) {
   });
 
   const onChangeInput = (e) => {
+    const actionType =
+      e.target.name === "name"
+        ? EDITOR_ACTIONS.CHANGE_NAME
+        : EDITOR_ACTIONS.CHANGE_EMAIL;
+
     dispatch({
-      type: `CHANGE_${e.target.name.toUpperCase()}`,
+      type: actionType,
       data: e.target.value,
     });
   };
 
   const onClickAddButton = () => {
     onCreate(contact);
-    dispatch({ type: "RESET" });
+    dispatch({ type: EDITOR_ACTIONS.RESET });
   };
 
   return (
