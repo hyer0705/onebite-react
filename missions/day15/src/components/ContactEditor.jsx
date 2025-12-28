@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import "./ContactEditor.css";
 import { contactEditorReducer } from "../reducers/contactEditorReducer";
 import { EDITOR_ACTIONS } from "../reducers/types";
@@ -9,11 +9,11 @@ export default function ContactEditor({ onCreate }) {
     email: "",
   });
 
+  const nameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
+
   const onChangeInput = (e) => {
-    const actionType =
-      e.target.name === "name"
-        ? EDITOR_ACTIONS.CHANGE_NAME
-        : EDITOR_ACTIONS.CHANGE_EMAIL;
+    const actionType = e.target.name === "name" ? EDITOR_ACTIONS.CHANGE_NAME : EDITOR_ACTIONS.CHANGE_EMAIL;
 
     dispatch({
       type: actionType,
@@ -22,6 +22,15 @@ export default function ContactEditor({ onCreate }) {
   };
 
   const onClickAddButton = () => {
+    if (contact.name === "") {
+      nameInputRef.current.focus();
+      return;
+    }
+    if (contact.email === "") {
+      emailInputRef.current.focus();
+      return;
+    }
+
     onCreate(contact);
     dispatch({ type: EDITOR_ACTIONS.RESET });
   };
@@ -30,8 +39,8 @@ export default function ContactEditor({ onCreate }) {
     <div className="ContactEditor">
       <div className="title">Add Contact</div>
       <div className="input_wrapper">
-        <input name="name" value={contact.name} onChange={onChangeInput} className="name" placeholder="이름 ..." />
-        <input name="email" value={contact.email} onChange={onChangeInput} className="contact" placeholder="연락처(이메일) ..." />
+        <input ref={nameInputRef} name="name" value={contact.name} onChange={onChangeInput} className="name" placeholder="이름 ..." />
+        <input ref={emailInputRef} name="email" value={contact.email} onChange={onChangeInput} className="contact" placeholder="연락처(이메일) ..." />
       </div>
       <button onClick={onClickAddButton}>Add</button>
     </div>
