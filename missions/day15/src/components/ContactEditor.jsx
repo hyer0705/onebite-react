@@ -21,6 +21,12 @@ export default function ContactEditor({ onCreate }) {
     });
   };
 
+  const onKeyDownEmailInput = (e) => {
+    if (e.key === "Enter") {
+      onClickAddButton();
+    }
+  };
+
   const onClickAddButton = () => {
     if (contact.name === "") {
       nameInputRef.current.focus();
@@ -54,6 +60,7 @@ export default function ContactEditor({ onCreate }) {
           name="email"
           value={contact.email}
           onChange={onChangeInput}
+          onKeyDown={onKeyDownEmailInput}
           className="contact"
           placeholder="연락처(이메일) ..."
         />
