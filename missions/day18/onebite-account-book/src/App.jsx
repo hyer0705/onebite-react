@@ -1,9 +1,17 @@
+import { Routes, Route } from "react-router";
 import "./App.css";
+import Home from "./pages/Home";
+import NewTransaction from "./pages/NewTransaction";
+import EditTransaction from "./pages/EditTransaction";
 
 function App() {
   return (
     <>
-      <h1>한입 가계부</h1>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/new-transaction" element={<NewTransaction />} />
+        <Route path="/edit-transaction/:id" element={<EditTransaction />} />
+      </Routes>
     </>
   );
 }
