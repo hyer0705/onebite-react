@@ -3,8 +3,11 @@ import "./App.css";
 import Home from "./pages/Home";
 import NewTransaction from "./pages/NewTransaction";
 import EditTransaction from "./pages/EditTransaction";
-import { useReducer, useRef } from "react";
+import { createContext, useCallback, useMemo, useReducer, useRef } from "react";
 import { mockData } from "./data/transactionMockData";
+
+const TransactionStateContext = createContext();
+const TransactionDispatchContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -25,7 +28,7 @@ function App() {
   const [transactions, setTransactions] = useReducer(reducer, mockData);
   const idRef = useRef(3);
 
-  const onCreateTransaction = (name, amount, type, category, date) => {
+  const onCreateTransaction = useCallback((name, amount, type, category, date) => {
     setTransactions({
       type: "CREATE",
       transaction: {
@@ -37,9 +40,9 @@ function App() {
         date,
       },
     });
-  };
+  }, []);
 
-  const onUpdateTransaction = (id, name, amount, type, category, date) => {
+  const onUpdateTransaction = useCallback((id, name, amount, type, category, date) => {
     setTransactions({
       type: "UPDATE",
       transaction: {
@@ -51,22 +54,35 @@ function App() {
         date,
       },
     });
-  };
+  }, []);
 
-  const onDeleteTransaction = (id) => {
+  const onDeleteTransaction = useCallback((id) => {
     setTransactions({
       type: "DELETE",
       id,
     });
-  };
+  }, []);
+
+  const memoizedTransactionDispatch = useMemo(
+    () => ({
+      onCreateTransaction,
+      onUpdateTransaction,
+      onDeleteTransaction,
+    }),
+    []
+  );
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/new-transaction" element={<NewTransaction />} />
-        <Route path="/edit-transaction/:id" element={<EditTransaction />} />
-      </Routes>
+      <TransactionStateContext.Provider value={transactions}>
+        <TransactionDispatchContext.Provider value={memoizedTransactionDispatch}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/new-transaction" element={<NewTransaction />} />
+            <Route path="/edit-transaction/:id" element={<EditTransaction />} />
+          </Routes>
+        </TransactionDispatchContext.Provider>
+      </TransactionStateContext.Provider>
     </>
   );
 }
