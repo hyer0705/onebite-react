@@ -1,68 +1,115 @@
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router";
 import "./TransactionEditor.css";
 
-const categories = [
-  {
-    id: 1,
-    name: "🍚 식비",
-    value: "food",
-  },
-  {
-    id: 2,
-    name: "💧 구독",
-    value: "subscribe",
-  },
-  {
-    id: 3,
-    name: "🏠 생활",
-    value: "life",
-  },
-  {
-    id: 4,
-    name: "🏢 급여",
-    value: "salary",
-  },
-  {
-    id: 5,
-    name: "💰 금융",
-    value: "bank",
-  },
-];
+const categories = new Map([
+  ["food", "🍚 식비"],
+  ["subscribe", "💧 구독"],
+  ["life", "🏠 생활"],
+  ["salary", "🏢 급여"],
+  ["finance", "💰 금융"],
+]);
 
-const TransactionEditor = () => {
+const TransactionEditor = ({ onCreate }) => {
+  const nav = useNavigate();
+  const typeRef = useRef();
+  const nameRef = useRef();
+  const amountRef = useRef();
+  const categoryRef = useRef();
+  const inputDateRef = useRef();
+
+  const [transactionInput, setTransactionInput] = useState({
+    type: "expense",
+    name: "",
+    amount: "",
+    category: "food",
+    date: "",
+  });
+
+  const onChange = (e) => {
+    setTransactionInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSaveButtonClick = () => {
+    const { type, name, amount, category, date } = transactionInput;
+
+    if (type === "") {
+      typeRef.current.focus();
+      return;
+    } else if (name === "") {
+      nameRef.current.focus();
+      return;
+    } else if (amount === "" || amount === 0) {
+      amountRef.current.focus();
+      return;
+    } else if (category === "") {
+      categoryRef.current.focus();
+      return;
+    } else if (date === "") {
+      inputDateRef.current.focus();
+      return;
+    }
+
+    onCreate(name, amount, type, categories.get(category), new Date(date).getTime());
+    nav("/", { replace: true });
+  };
+
+  const onCancelButtonClick = () => {
+    nav("/", { replace: true });
+  };
+
+  const onInputDateClick = () => {
+    inputDateRef.current.showPicker();
+  };
+
   return (
     <div className="transaction_editor">
       <section className="type_section input_wrapper">
         <label>분류</label>
-        <select>
+        <select ref={typeRef} value={transactionInput.type} name="type" onChange={onChange}>
           <option value="expense">지출</option>
           <option value="income">수입</option>
         </select>
       </section>
       <section className="name_section input_wrapper">
         <label>지출/수입 이름</label>
-        <input type="text" placeholder="지출 & 수입 이름을 입력하세요..." />
+        <input
+          ref={nameRef}
+          value={transactionInput.name}
+          name="name"
+          onChange={onChange}
+          type="text"
+          placeholder="지출 & 수입 이름을 입력하세요..."
+        />
       </section>
       <section className="amount_section input_wrapper">
         <label>지출/수입 금액</label>
-        <input type="number" placeholder="금액을 입력하세요" />
+        <input ref={amountRef} value={transactionInput.amount} name="amount" onChange={onChange} type="number" placeholder="금액을 입력하세요" />
       </section>
       <section className="category_section input_wrapper">
         <label>카테고리</label>
-        <select>
-          {categories.map((category) => (
-            <option key={category.id} value={category.value}>
-              {category.name}
+        <select ref={categoryRef} value={transactionInput.category} name="category" onChange={onChange}>
+          {[...categories].map(([key, value], i) => (
+            <option key={`${i}_${key}`} value={key}>
+              {value}
             </option>
           ))}
         </select>
       </section>
       <section className="date_section input_wrapper">
         <label>날짜</label>
-        <input type="date" />
+        <input onClick={onInputDateClick} ref={inputDateRef} type="date" value={transactionInput.date} name="date" onChange={onChange} />
       </section>
       <section className="button_section">
-        <button className="save_button">저장</button>
-        <button className="cancel_button">취소</button>
+        <button className="save_button" onClick={onSaveButtonClick}>
+          저장
+        </button>
+        <button className="cancel_button" onClick={onCancelButtonClick}>
+          취소
+        </button>
       </section>
     </div>
   );
