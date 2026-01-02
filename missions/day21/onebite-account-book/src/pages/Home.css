@@ -1,0 +1,21 @@
+.home header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.home header button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(125, 94, 250);
+  color: white;
+  cursor: pointer;
+}
+
+.home .home_transactions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
