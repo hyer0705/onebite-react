@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import "./TransactionEditor.css";
-import { CATEGORIES } from "../constants/categories";
+import { CATEGORIES, getCategory } from "../constants/categories";
 import { TRANSACTION_TYPES } from "../constants/transaction";
+import { getFormattedDate } from "../utils/getFormattedDate";
 
-const TransactionEditor = ({ onCreate }) => {
+const TransactionEditor = ({ type, initData, onSave }) => {
   const nav = useNavigate();
   const typeRef = useRef();
   const nameRef = useRef();
@@ -12,13 +13,21 @@ const TransactionEditor = ({ onCreate }) => {
   const categoryRef = useRef();
   const inputDateRef = useRef();
 
-  const [transactionInput, setTransactionInput] = useState({
-    type: TRANSACTION_TYPES.EXPENSE,
-    name: "",
-    amount: "",
-    category: "food",
-    date: "",
-  });
+  const [transactionInput, setTransactionInput] = useState(
+    type === "EDIT"
+      ? {
+          ...initData,
+          date: getFormattedDate(initData.date),
+          category: getCategory(initData.category),
+        }
+      : {
+          type: TRANSACTION_TYPES.EXPENSE,
+          name: "",
+          amount: "",
+          category: "food",
+          date: "",
+        }
+  );
 
   const onChange = (e) => {
     setTransactionInput((prev) => ({
@@ -28,15 +37,15 @@ const TransactionEditor = ({ onCreate }) => {
   };
 
   const onSaveButtonClick = () => {
-    const { type, name, amount, category, date } = transactionInput;
+    const { id, type: transactionType, name, amount, category, date } = transactionInput;
 
-    if (type === "") {
+    if (transactionType === "") {
       typeRef.current.focus();
       return;
     } else if (name === "") {
       nameRef.current.focus();
       return;
-    } else if (amount === "" || amount === 0) {
+    } else if (amount === "" || amount == 0) {
       amountRef.current.focus();
       return;
     } else if (category === "") {
@@ -47,7 +56,12 @@ const TransactionEditor = ({ onCreate }) => {
       return;
     }
 
-    onCreate(name, amount, type, CATEGORIES.get(category), new Date(date).getTime());
+    if (type === "NEW") {
+      onSave(name, amount, transactionType, CATEGORIES.get(category), new Date(date).getTime());
+    } else if (type === "EDIT") {
+      onSave(id, name, amount, transactionType, CATEGORIES.get(category), new Date(date).getTime());
+    }
+
     nav("/", { replace: true });
   };
 

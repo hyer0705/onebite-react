@@ -10,7 +10,7 @@ const NewTransaction = () => {
       <header>
         <h2>새로운 기록</h2>
       </header>
-      <TransactionEditor onCreate={onCreateTransaction} />
+      <TransactionEditor type="NEW" initData={null} onCreate={onCreateTransaction} />
     </div>
   );
 };
