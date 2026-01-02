@@ -91,6 +91,7 @@ const TransactionEditor = ({ type, initData, onSave }) => {
           onChange={onChange}
           type="text"
           placeholder="지출 & 수입 이름을 입력하세요..."
+          autoComplete="off"
         />
       </section>
       <section className="amount_section input_wrapper">
@@ -109,7 +110,15 @@ const TransactionEditor = ({ type, initData, onSave }) => {
       </section>
       <section className="date_section input_wrapper">
         <label>날짜</label>
-        <input onClick={onInputDateClick} ref={inputDateRef} type="date" value={transactionInput.date} name="date" onChange={onChange} />
+        <input
+          autoComplete="off"
+          onClick={onInputDateClick}
+          ref={inputDateRef}
+          type="date"
+          value={transactionInput.date}
+          name="date"
+          onChange={onChange}
+        />
       </section>
       <section className="button_section">
         <button className="save_button" onClick={onSaveButtonClick}>
