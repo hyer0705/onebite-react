@@ -1,6 +1,7 @@
 import TransactionEditor from "../components/TransactionEditor";
 import { useTransactionDispatch } from "../context/TransactionContext";
 import "./NewTransaction.css";
+import { EDITOR_TYPES } from "../constants/transaction";
 
 const NewTransaction = () => {
   const { onCreateTransaction } = useTransactionDispatch();
@@ -10,7 +11,7 @@ const NewTransaction = () => {
       <header>
         <h1>새로운 기록</h1>
       </header>
-      <TransactionEditor type="NEW" onSave={onCreateTransaction} />
+      <TransactionEditor type={EDITOR_TYPES.NEW} onSave={onCreateTransaction} />
     </div>
   );
 };

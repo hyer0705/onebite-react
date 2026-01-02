@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import "./EditTransaction.css";
 import TransactionEditor from "../components/TransactionEditor";
 import { useTransactionDispatch, useTransactionState } from "../context/TransactionContext";
+import { EDITOR_TYPES } from "../constants/transaction";
 
 const EditTransaction = () => {
   const nav = useNavigate();
@@ -28,7 +29,7 @@ const EditTransaction = () => {
       <header>
         <h1>기록 수정하기</h1>
       </header>
-      <TransactionEditor type="EDIT" initData={currentInitData} onSave={onUpdateTransaction} />
+      <TransactionEditor type={EDITOR_TYPES.EDIT} initData={currentInitData} onSave={onUpdateTransaction} />
     </div>
   );
 };

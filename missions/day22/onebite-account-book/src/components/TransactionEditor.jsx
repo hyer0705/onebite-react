@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import "./TransactionEditor.css";
 import { CATEGORIES, getCategory } from "../constants/categories";
-import { TRANSACTION_TYPES } from "../constants/transaction";
+import { TRANSACTION_TYPES, EDITOR_TYPES } from "../constants/transaction";
 import { getFormattedDate } from "../utils/getFormattedDate";
 
 const TransactionEditor = ({ type, initData, onSave }) => {
@@ -14,7 +14,7 @@ const TransactionEditor = ({ type, initData, onSave }) => {
   const inputDateRef = useRef();
 
   const [transactionInput, setTransactionInput] = useState(
-    type === "EDIT"
+    type === EDITOR_TYPES.EDIT
       ? {
           ...initData,
           date: getFormattedDate(initData.date),
@@ -56,9 +56,9 @@ const TransactionEditor = ({ type, initData, onSave }) => {
       return;
     }
 
-    if (type === "NEW") {
+    if (type === EDITOR_TYPES.NEW) {
       onSave(name, amount, transactionType, CATEGORIES.get(category), new Date(date).getTime());
-    } else if (type === "EDIT") {
+    } else if (type === EDITOR_TYPES.EDIT) {
       onSave(id, name, amount, transactionType, CATEGORIES.get(category), new Date(date).getTime());
     }
 
