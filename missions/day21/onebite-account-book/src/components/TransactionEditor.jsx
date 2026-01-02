@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import "./TransactionEditor.css";
 import { CATEGORIES } from "../constants/categories";
+import { TRANSACTION_TYPES } from "../constants/transaction";
 
 const TransactionEditor = ({ onCreate }) => {
   const nav = useNavigate();
@@ -12,7 +13,7 @@ const TransactionEditor = ({ onCreate }) => {
   const inputDateRef = useRef();
 
   const [transactionInput, setTransactionInput] = useState({
-    type: "expense",
+    type: TRANSACTION_TYPES.EXPENSE,
     name: "",
     amount: "",
     category: "food",
@@ -63,8 +64,8 @@ const TransactionEditor = ({ onCreate }) => {
       <section className="type_section input_wrapper">
         <label>분류</label>
         <select ref={typeRef} value={transactionInput.type} name="type" onChange={onChange}>
-          <option value="expense">지출</option>
-          <option value="income">수입</option>
+          <option value={TRANSACTION_TYPES.EXPENSE}>지출</option>
+          <option value={TRANSACTION_TYPES.INCOME}>수입</option>
         </select>
       </section>
       <section className="name_section input_wrapper">
