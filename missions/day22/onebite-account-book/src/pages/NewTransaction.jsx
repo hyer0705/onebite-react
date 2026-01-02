@@ -8,7 +8,7 @@ const NewTransaction = () => {
   return (
     <div className="new_transaction">
       <header>
-        <h2>새로운 기록</h2>
+        <h1>새로운 기록</h1>
       </header>
       <TransactionEditor onCreate={onCreateTransaction} />
     </div>
