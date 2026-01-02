@@ -1,5 +1,11 @@
+import TransactionEditor from "../components/TransactionEditor";
+
 const NewTransaction = () => {
-  return <h1>New Transaction</h1>;
+  return (
+    <section>
+      <TransactionEditor />
+    </section>
+  );
 };
 
 export default NewTransaction;

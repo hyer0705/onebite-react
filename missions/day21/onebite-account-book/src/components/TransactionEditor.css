@@ -1,0 +1,60 @@
+.transaction_editor {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.transaction_editor .input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.transaction_editor .input_wrapper input,
+.transaction_editor .input_wrapper select {
+  padding: 15px 10px;
+  background-color: rgb(31, 33, 59);
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+.transaction_editor .input_wrapper select:focus,
+.transaction_editor .input_wrapper input:focus {
+  outline: 1px solid rgb(60, 65, 100);
+}
+
+.transaction_editor .input_wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.transaction_editor .button_section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.transaction_editor .button_section button {
+  padding: 15px 0;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.transaction_editor .button_section button.save_button {
+  background-color: rgb(125, 94, 250);
+}
+
+.transaction_editor .button_section button.save_button:hover {
+  background-color: rgb(145, 120, 255);
+}
+
+.transaction_editor .button_section button.cancel_button {
+  background-color: rgb(255, 33, 34);
+}
+
+.transaction_editor .button_section button.cancel_button:hover {
+  background-color: rgb(255, 70, 70);
+}
