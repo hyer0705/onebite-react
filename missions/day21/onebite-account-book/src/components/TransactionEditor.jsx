@@ -1,14 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import "./TransactionEditor.css";
-
-const categories = new Map([
-  ["food", "🍚 식비"],
-  ["subscribe", "💧 구독"],
-  ["life", "🏠 생활"],
-  ["salary", "🏢 급여"],
-  ["finance", "💰 금융"],
-]);
+import { CATEGORIES } from "../constants/categories";
 
 const TransactionEditor = ({ onCreate }) => {
   const nav = useNavigate();
@@ -53,7 +46,7 @@ const TransactionEditor = ({ onCreate }) => {
       return;
     }
 
-    onCreate(name, amount, type, categories.get(category), new Date(date).getTime());
+    onCreate(name, amount, type, CATEGORIES.get(category), new Date(date).getTime());
     nav("/", { replace: true });
   };
 
@@ -92,7 +85,7 @@ const TransactionEditor = ({ onCreate }) => {
       <section className="category_section input_wrapper">
         <label>카테고리</label>
         <select ref={categoryRef} value={transactionInput.category} name="category" onChange={onChange}>
-          {[...categories].map(([key, value], i) => (
+          {[...CATEGORIES].map(([key, value], i) => (
             <option key={`${i}_${key}`} value={key}>
               {value}
             </option>
