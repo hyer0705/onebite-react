@@ -2,6 +2,7 @@ import "./Home.css";
 import { useTransactionState } from "../context/TransactionContext";
 import TransactionItem from "../components/TransactionItem";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const Home = () => {
   const nav = useNavigate();
@@ -16,6 +17,8 @@ const Home = () => {
   const onCreateButtonClick = () => {
     nav("/new-transaction");
   };
+
+  useEffect(() => {}, []);
 
   return (
     <section className="home">
