@@ -1,0 +1,11 @@
+.edit_transaction {
+  padding: 0 0 50px 0;
+}
+
+.edit_transaction header {
+  margin-bottom: 50px;
+}
+
+.edit_transaction header h1 {
+  font-size: 36px;
+}

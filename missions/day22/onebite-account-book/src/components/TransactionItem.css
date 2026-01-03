@@ -1,0 +1,47 @@
+.transaction_item_wrapper {
+  background-color: rgb(31, 33, 59);
+  padding: 20px 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 5px;
+}
+
+.transaction_item_wrapper .item_name {
+  flex: 1;
+}
+
+.transaction_item_wrapper .item_category {
+  background-color: rgb(20, 21, 37);
+  color: rgb(121, 121, 122);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.transaction_item_wrapper .item_amount_expense {
+  color: rgb(255, 33, 34);
+}
+
+.transaction_item_wrapper .item_amount_income {
+  color: rgb(42, 227, 167);
+}
+
+.transaction_item_wrapper .item_date {
+  color: rgb(121, 121, 122);
+  font-size: 14px;
+}
+
+.transaction_item_wrapper .item_button_wrapper {
+  display: flex;
+  gap: 10px;
+}
+.transaction_item_wrapper button {
+  background-color: rgb(20, 21, 37);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
