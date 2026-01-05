@@ -1,0 +1,11 @@
+.new_transaction {
+  padding: 0 0 50px 0;
+}
+
+.new_transaction header {
+  margin-bottom: 50px;
+}
+
+.new_transaction header h1 {
+  font-size: 36px;
+}
